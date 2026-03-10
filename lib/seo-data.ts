@@ -1,6 +1,8 @@
 /**
  * Centralized SEO metadata for each service page.
- * Keywords are kept lean (5-8 per page) to stay natural and avoid stuffing.
+ * Mix of 2 geo-targeted + 3 generic keywords per page.
+ * Google already knows our location from JSON-LD structured data,
+ * so most searchers will find us without needing "Kenya" in every term.
  */
 
 export interface ServiceSEO {
@@ -18,8 +20,8 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
       "UI/UX design Kenya",
       "UX designer Nairobi",
       "Figma design services",
-      "website design Kenya",
       "user interface design",
+      "responsive web design",
     ],
   },
 
@@ -30,9 +32,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "web development company Kenya",
       "software development Nairobi",
-      "React developer Kenya",
-      "Next.js development",
-      "custom web application Kenya",
+      "custom web application",
+      "React Next.js developer",
+      "SaaS development",
     ],
   },
 
@@ -43,9 +45,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "mobile app development Kenya",
       "app developer Nairobi",
-      "Flutter developer Kenya",
-      "React Native Kenya",
-      "M-Pesa app integration",
+      "Flutter development",
+      "React Native developer",
+      "cross-platform mobile apps",
     ],
   },
 
@@ -54,11 +56,11 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     description:
       "E-commerce development company in Nairobi. Custom online stores with M-Pesa, Stripe and PayPal integration. Shopify, WooCommerce and headless commerce.",
     keywords: [
-      "ecommerce website Kenya",
-      "online store development Nairobi",
+      "ecommerce development Kenya",
+      "online store Nairobi",
       "M-Pesa payment integration",
-      "Shopify developer Kenya",
-      "ecommerce solutions Kenya",
+      "Shopify development",
+      "headless commerce",
     ],
   },
 
@@ -69,9 +71,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "CRM development Kenya",
       "ERP system Nairobi",
-      "business management software Kenya",
-      "Odoo implementation Kenya",
+      "business management software",
       "workflow automation",
+      "custom internal tools",
     ],
   },
 
@@ -81,10 +83,10 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
       "Cloud infrastructure and DevOps consulting in Nairobi. AWS, Docker, Kubernetes, CI/CD pipelines and infrastructure-as-code for Kenyan businesses.",
     keywords: [
       "cloud services Kenya",
-      "DevOps Nairobi",
-      "AWS consulting Kenya",
+      "DevOps consulting Nairobi",
+      "AWS infrastructure",
       "CI/CD pipeline setup",
-      "cloud infrastructure Kenya",
+      "Docker Kubernetes",
     ],
   },
 
@@ -95,9 +97,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "WordPress developer Kenya",
       "Webflow designer Nairobi",
-      "business website Kenya",
-      "affordable website Kenya",
-      "CMS website development",
+      "business website development",
+      "CMS website",
+      "affordable web design",
     ],
   },
 
@@ -107,10 +109,10 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
       "SEO and digital marketing agency in Nairobi. Technical SEO audits, on-page optimization, local SEO and content strategy to grow your organic traffic.",
     keywords: [
       "SEO services Kenya",
-      "SEO company Nairobi",
-      "digital marketing Kenya",
+      "digital marketing Nairobi",
+      "technical SEO audit",
       "search engine optimization",
-      "local SEO Kenya",
+      "content marketing strategy",
     ],
   },
 
@@ -119,10 +121,10 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     description:
       "Cybersecurity services in Nairobi. Security audits, penetration testing, SSL setup and Kenya Data Protection Act compliance for businesses.",
     keywords: [
-      "cybersecurity Kenya",
+      "cybersecurity services Kenya",
       "penetration testing Nairobi",
-      "data protection compliance Kenya",
-      "security audit Kenya",
+      "security audit",
+      "data protection compliance",
       "website security",
     ],
   },
@@ -134,9 +136,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "IT support Kenya",
       "managed IT services Nairobi",
-      "website maintenance Kenya",
-      "IT outsourcing Kenya",
+      "website maintenance",
       "server monitoring",
+      "IT outsourcing",
     ],
   },
 
@@ -147,9 +149,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "data analytics Kenya",
       "business intelligence Nairobi",
-      "Power BI consultant Kenya",
+      "Power BI consulting",
       "custom dashboards",
-      "data visualization Kenya",
+      "data visualization",
     ],
   },
 
@@ -160,9 +162,9 @@ export const serviceSEOData: Record<string, ServiceSEO> = {
     keywords: [
       "cloud hosting Kenya",
       "website migration Nairobi",
-      "managed hosting Kenya",
+      "managed hosting",
       "server migration",
-      "CDN setup Kenya",
+      "CDN setup",
     ],
   },
 };
