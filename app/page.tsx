@@ -1,82 +1,53 @@
-"use client";
-import { useState, useEffect, Suspense } from "react";
-import dynamic from "next/dynamic";
-import Contact from "@/components/Contact";
+import HeroReload from "@/components/hero/HeroReload";
+import Services from "@/components/services/Services";
+import About from "@/components/about/About";
+import Contact from "@/components/contact/Contact";
+import Testimonials from "@/components/testimonials/Testimonials";
+import Divider from "@/components/shared/Divider";
 
-// Loading skeletons for each component
-const ComponentSkeleton = () => (
-  <div className='w-full animate-pulse'>
-    <div className='h-[600px] bg-white/[0.05] rounded-3xl' />
-  </div>
-);
-
-// Dynamically import components with Suspense and loading skeletons
-const Divider = dynamic(() => import("@/components/Divider"), {
-  loading: () => <div className='h-32' />,
-  suspense: true,
-});
-
-const HeroReload = dynamic(() => import("@/components/HeroReload"), {
-  loading: () => <ComponentSkeleton />,
-  suspense: true,
-});
-
-const Services = dynamic(() => import("@/components/Services"), {
-  loading: () => <ComponentSkeleton />,
-  suspense: true,
-});
-
-const About = dynamic(() => import("@/components/About"), {
-  loading: () => <ComponentSkeleton />,
-  suspense: true,
-});
-
-const ScrollProgress = dynamic(
-  () =>
-    import("@/components/ui/ScrollProgress").then((mod) => mod.ScrollProgress),
-  {
-    loading: () => <div className='h-1 bg-white/[0.05]' />,
-    suspense: true,
-  }
-);
-
-const Pricing = dynamic(() => import("@/components/Pricing"), {
-  loading: () => <ComponentSkeleton />,
-  suspense: true,
-});
-
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
-  loading: () => <ComponentSkeleton />,
-  suspense: true,
-});
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Astraque Softwares",
+  url: "https://www.astraque.com",
+  description:
+    "Nairobi-based web development, mobile apps, UI/UX design, SEO & cloud solutions.",
+  publisher: {
+    "@type": "Organization",
+    name: "Astraque Softwares",
+  },
+};
 
 export default function Home() {
   return (
     <main className='flex w-full min-h-screen flex-col items-center justify-between pt-24'>
-      <ScrollProgress>
-        <div className='w-full' style={{ contentVisibility: "auto" }}>
-          <HeroReload />
-          <section id='services' style={{ minHeight: "100vh" }}>
-            <Services />
-          </section>
-          <Divider />
-          <section id='about' style={{ minHeight: "100vh" }}>
-            <About />
-          </section>
-          <Divider />
-          <section id='pricing' style={{ minHeight: "100vh" }}>
-            <Pricing />
-          </section>
-          <Divider />
-          <section id='contact' style={{ minHeight: "100vh" }}>
-            <Contact />
-          </section>
-          <Divider />
-          <section style={{ minHeight: "100vh" }}>
-            <Testimonials />
-          </section>
-        </div>
-      </ScrollProgress>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteJsonLd).replaceAll(
+            "<",
+            String.raw`\u003c`,
+          ),
+        }}
+      />
+      <div className='w-full' style={{ contentVisibility: "auto" }}>
+        <HeroReload />
+        <section id='services' style={{ minHeight: "100vh" }}>
+          <Services />
+        </section>
+        <Divider />
+        <section id='about' style={{ minHeight: "100vh" }}>
+          <About />
+        </section>
+        <Divider />
+        <section id='contact' style={{ minHeight: "100vh" }}>
+          <Contact />
+        </section>
+        <Divider />
+        <section style={{ minHeight: "100vh" }}>
+          <Testimonials />
+        </section>
+      </div>
     </main>
   );
 }

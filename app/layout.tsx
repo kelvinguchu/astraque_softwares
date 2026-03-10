@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import { ThemeProvider } from "next-themes";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import Script from "next/script";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.astraque.com"),
@@ -15,53 +12,18 @@ export const metadata: Metadata = {
     template: "%s | Astraque Softwares",
   },
   description:
-    "Professional web design, web development, software development, and graphic design services. Transform your digital presence with Astraque Softwares.",
+    "Astraque Softwares — Nairobi-based web development, mobile apps, UI/UX design, SEO & cloud solutions. Trusted by businesses across Kenya.",
   keywords: [
-    "website development",
-    "website design",
-    "website development company",
-    "website development services",
-    "website design company",
-    "website design services",
-    "software development",
-    "software development services",
-    "software development company",
-    "software development solutions",
-    "SEO services",
-    "SEO company",
-    "SEO solutions",
-    "graphic design",
-    "graphic design services",
-    "graphic design company",
-    "graphic design solutions",
-    "digital marketing",
-    "digital marketing services",
-    "digital marketing company",
-    "digital marketing solutions",
-    "ecommerce development",
-    "ecommerce development services",
-    "ecommerce development company",
-    "ecommerce development solutions",
-    "Best website development company",
-    "Best website development services",
-    "Best website development solutions",
-    "Best software development company",
-    "Best software development services",
-    "Best software development solutions",
-    "Best graphic design company",
-    "Best graphic design services",
-    "Best graphic design solutions",
-    "Best digital marketing company",
-    "Best digital marketing services",
-    "Best digital marketing solutions",
-    "Best ecommerce development company",
-    "Best ecommerce development services",
-    "Best ecommerce development solutions",
-    "Best SEO company",
-    "Best SEO services",
-    "Best SEO solutions",
+    "web development company Kenya",
+    "software development Nairobi",
+    "mobile app developers Kenya",
+    "UI/UX design Nairobi",
+    "SEO services Kenya",
+    "ecommerce development Kenya",
+    "IT solutions Nairobi",
+    "cloud hosting Kenya",
+    "cybersecurity Kenya",
     "Astraque Softwares",
-    "Digital solutions",
   ],
   authors: [{ name: "Astraque Softwares" }],
   creator: "Astraque Softwares",
@@ -80,7 +42,8 @@ export const metadata: Metadata = {
     siteName: "Astraque Softwares",
     title: "Astraque Softwares | Web & Software Development Solutions",
     description:
-      "Professional web design, web development, software development, and graphic design services. Transform your digital presence with Astraque Softwares.",
+      "Astraque Softwares — Nairobi-based web development, mobile apps, UI/UX design, SEO & cloud solutions. Trusted by businesses across Kenya.",
+    locale: "en_KE",
     url: "https://www.astraque.com",
     images: [
       {
@@ -130,7 +93,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <head>
+      <body>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Astraque Softwares",
+              url: "https://www.astraque.com",
+              logo: "https://www.astraque.com/favicon.png",
+              sameAs: ["https://x.com/astraque_kenya"],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer service",
+                areaServed: "KE",
+                availableLanguage: ["English", "Swahili"],
+              },
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Nairobi",
+                addressCountry: "KE",
+              },
+            }).replaceAll("<", String.raw`\u003c`),
+          }}
+        />
+        <ThemeProvider attribute='class' defaultTheme='dark'>
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=G-X2F0X3PXRQ'
           strategy='afterInteractive'
@@ -144,13 +136,6 @@ export default function RootLayout({
             gtag('config', 'G-X2F0X3PXRQ');
           `}
         </Script>
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider attribute='class' defaultTheme='dark'>
-          <Navbar />
-          {children}
-          <Footer />
-        </ThemeProvider>
       </body>
     </html>
   );

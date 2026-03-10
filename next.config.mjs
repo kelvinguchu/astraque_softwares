@@ -8,40 +8,17 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    optimizeCss: true,
-    webpackBuildWorker: true,
-    turbotrace: {
-      logLevel: "error",
-    },
-  },
-  webpack: (config) => {
-    config.optimization.splitChunks = {
-      chunks: "all",
-      minSize: 20000,
-      maxSize: 70000,
-      minChunks: 1,
-      maxAsyncRequests: 30,
-      maxInitialRequests: 30,
-      cacheGroups: {
-        default: false,
-        vendors: false,
-        framework: {
-          chunks: "all",
-          name: "framework",
-          test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
-          priority: 40,
-          enforce: true,
-        },
-        commons: {
-          name: "commons",
-          minChunks: 2,
-          priority: 20,
-        },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        ],
       },
-    };
-
-    return config;
+    ];
   },
 };
 

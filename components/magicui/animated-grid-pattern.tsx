@@ -2,13 +2,12 @@
 
 import React, {
   useEffect,
-  useId,
   useRef,
   useState,
   useCallback,
   useMemo,
 } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import useWindowSize from "@/hooks/useWindowSize";
 
@@ -23,6 +22,7 @@ interface GridPatternProps {
   maxOpacity?: number;
   duration?: number;
   repeatDelay?: number;
+  id: string;
 }
 
 export function GridPattern({
@@ -36,9 +36,9 @@ export function GridPattern({
   maxOpacity = 0.5,
   duration = 4,
   repeatDelay = 0.5,
+  id,
   ...props
-}: GridPatternProps) {
-  const id = useId();
+}: Readonly<GridPatternProps>) {
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const { width: windowWidth } = useWindowSize();
@@ -60,35 +60,35 @@ export function GridPattern({
         pos: getPos(),
       }));
     },
-    [getPos]
+    [getPos],
   );
 
   const squares = useMemo(
     () => generateSquares(adjustedNumSquares),
-    [generateSquares, adjustedNumSquares]
+    [generateSquares, adjustedNumSquares],
   );
 
   const updateSquarePosition = useCallback(
     (id: number) => {
-      setSquares((currentSquares) =>
+      setSquaresState((currentSquares) =>
         currentSquares.map((sq) =>
           sq.id === id
             ? {
                 ...sq,
                 pos: getPos(),
               }
-            : sq
-        )
+            : sq,
+        ),
       );
     },
-    [getPos]
+    [getPos],
   );
 
-  const [squaresState, setSquares] = useState(squares);
+  const [squaresState, setSquaresState] = useState(squares);
 
   useEffect(() => {
     if (dimensions.width && dimensions.height) {
-      setSquares(generateSquares(adjustedNumSquares));
+      setSquaresState(generateSquares(adjustedNumSquares));
     }
   }, [dimensions, adjustedNumSquares, generateSquares]);
 
@@ -119,7 +119,7 @@ export function GridPattern({
       aria-hidden='true'
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
-        className
+        className,
       )}
       {...props}>
       <defs>

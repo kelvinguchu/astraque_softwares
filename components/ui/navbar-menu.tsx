@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
 
 const transition = {
-  type: "spring",
+  type: "spring" as const,
   mass: 0.5,
   damping: 11.5,
   stiffness: 100,
@@ -28,25 +28,25 @@ export const MenuItem = ({
 }) => {
   return (
     <div onMouseEnter={() => setActive(item)} className='relative'>
-      <Link href={href} passHref>
-        <motion.a
-          transition={{ duration: 0.3 }}
+      <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
+        <Link
+          href={href}
           aria-label={item}
           className='cursor-pointer text-black hover:opacity-[0.9] dark:text-white'>
           {item}
-        </motion.a>
-      </Link>
+        </Link>
+      </motion.div>
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={transition}>
           {active === item && (
-            <div className='absolute top-[calc(100%_+_0.2rem)] left-1/2 transform -translate-x-1/2 pt-4'>
+            <div className='absolute top-[calc(100%+0.2rem)] left-1/2 transform -translate-x-1/2 pt-4'>
               <motion.div
                 transition={transition}
                 layoutId='active'
-                className='bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.4] dark:border-white/[0.2] shadow-xl'>
+                className='bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/40 dark:border-white/20 shadow-xl'>
                 <motion.div layout className='w-max h-full p-2'>
                   {children}
                 </motion.div>
@@ -69,7 +69,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className='relative rounded-full border dark:bg-transparent  dark:border-white/[0.2] shadow-input flex justify-center space-x-4 px-10 py-2'>
+      className='relative rounded-full border dark:bg-transparent  dark:border-white/20 shadow-input flex justify-center space-x-4 px-10 py-2'>
       {children}
     </nav>
   );
@@ -95,13 +95,13 @@ export const ProductItem = ({
         width={140}
         height={70}
         alt={title}
-        className='flex-shrink-0 rounded-md shadow-2xl'
+        className='shrink-0 rounded-md shadow-2xl'
       />
       <div>
         <h4 className='text-xl font-bold mb-1 text-black dark:text-white'>
           {title}
         </h4>
-        <p className='text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300'>
+        <p className='text-neutral-700 text-sm max-w-40 dark:text-neutral-300'>
           {description}
         </p>
       </div>
