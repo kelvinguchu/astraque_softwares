@@ -1,9 +1,6 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import {
   IconBrandTwitter,
   IconBrandInstagram,
@@ -14,7 +11,7 @@ import {
   IconBrandWhatsapp,
   IconRobot,
 } from "@tabler/icons-react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useTheme } from "next-themes";
 
 const navigation = [
@@ -122,14 +119,14 @@ export default function Footer() {
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 lg:gap-16'>
           {/* Brand */}
           <div className='space-y-6'>
-            <Link href='/' className='relative flex items-center mb-6'>
-              <Image
+            <Link to='/' className='relative flex items-center mb-6'>
+              <img
                 src={logoSrc}
                 width={150}
                 height={52}
                 alt='Astraque logo'
                 className='w-36 h-13 object-contain'
-                priority
+                fetchPriority='high'
               />
             </Link>
             <p className='text-sm leading-6 text-gray-300'>
@@ -138,7 +135,7 @@ export default function Footer() {
             </p>
             <div className='flex flex-wrap gap-4 sm:gap-6'>
               {socialLinks.map((item) => (
-                <Link
+                <a
                   key={item.name}
                   href={item.href}
                   target='_blank'
@@ -146,7 +143,7 @@ export default function Footer() {
                   className='text-gray-400 hover:text-white transition-colors'>
                   <span className='sr-only'>{item.name}</span>
                   <item.icon className='h-5 w-5' />
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -159,11 +156,11 @@ export default function Footer() {
             <ul className='space-y-3 sm:space-y-4'>
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <Link
+                  <a
                     href={item.href}
                     className='text-sm leading-6 text-gray-300 hover:text-white transition-colors'>
                     {item.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -176,28 +173,28 @@ export default function Footer() {
             </h2>
             <ul className='space-y-3 sm:space-y-4'>
               <li>
-                <Link
+                <a
                   href='tel:+254792554525'
                   className='text-sm leading-6 text-gray-300 hover:text-white transition-colors flex items-center gap-2'>
                   <IconPhone className='w-4 h-4' />
                   <span>+254 792 554525</span>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href='tel:+254725799783'
                   className='text-sm leading-6 text-gray-300 hover:text-white transition-colors flex items-center gap-2'>
                   <IconPhone className='w-4 h-4' />
                   <span>+254 725 799783</span>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href='mailto:astraquesoftwares@gmail.com'
                   className='text-sm leading-6 text-gray-300 hover:text-white transition-colors flex items-center gap-2'>
                   <IconMail className='w-4 h-4' />
                   <span>astraquesoftwares@gmail.com</span>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

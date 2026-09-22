@@ -1,34 +1,38 @@
+import { createFileRoute } from "@tanstack/react-router";
 import HeroReload from "@/components/hero/HeroReload";
 import Services from "@/components/services/Services";
 import About from "@/components/about/About";
 import Contact from "@/components/contact/Contact";
 import Testimonials from "@/components/testimonials/Testimonials";
 import Divider from "@/components/shared/Divider";
+import { SITE_NAME, SITE_URL, canonical, serializeJsonLd } from "@/lib/seo";
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Astraque Softwares",
-  url: "https://www.astraque.com",
+  name: SITE_NAME,
+  url: SITE_URL,
   description:
     "Nairobi-based web development, mobile apps, UI/UX design, SEO & cloud solutions.",
   publisher: {
     "@type": "Organization",
-    name: "Astraque Softwares",
+    name: SITE_NAME,
   },
 };
 
-export default function Home() {
+export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [canonical("")],
+  }),
+  component: Home,
+});
+
+function Home() {
   return (
     <main className='flex w-full min-h-screen flex-col items-center justify-between pt-24'>
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteJsonLd).replaceAll(
-            "<",
-            String.raw`\u003c`,
-          ),
-        }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteJsonLd) }}
       />
       <div className='w-full' style={{ contentVisibility: "auto" }}>
         <HeroReload />

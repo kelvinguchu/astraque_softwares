@@ -1,8 +1,5 @@
-"use client";
 import React from "react";
 import { motion } from "motion/react";
-import Link from "next/link";
-import Image from "next/image";
 
 const transition = {
   type: "spring" as const,
@@ -29,12 +26,12 @@ export const MenuItem = ({
   return (
     <div onMouseEnter={() => setActive(item)} className='relative'>
       <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
-        <Link
+        <a
           href={href}
           aria-label={item}
           className='cursor-pointer text-black hover:opacity-[0.9] dark:text-white'>
           {item}
-        </Link>
+        </a>
       </motion.div>
       {active !== null && (
         <motion.div
@@ -89,8 +86,8 @@ export const ProductItem = ({
   className?: string;
 }) => {
   return (
-    <Link href={href} className={`flex space-x-2 ${className}`}>
-      <Image
+    <a href={href} className={`flex space-x-2 ${className}`}>
+      <img
         src={src}
         width={140}
         height={70}
@@ -105,16 +102,16 @@ export const ProductItem = ({
           {description}
         </p>
       </div>
-    </Link>
+    </a>
   );
 };
 
 export const HoveredLink = ({ children, ...rest }: any) => {
   return (
-    <Link
+    <a
       {...rest}
       className='text-neutral-700 dark:text-neutral-200 hover:text-black '>
       {children}
-    </Link>
+    </a>
   );
 };

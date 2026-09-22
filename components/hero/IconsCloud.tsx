@@ -1,18 +1,10 @@
-"use client";
+import { Suspense, lazy, memo } from "react";
 
-import dynamic from "next/dynamic";
-import { Suspense, memo } from "react";
-
-const IconCloudComponent = dynamic(
-  () => import("@/components/ui/icon-cloud").then((mod) => memo(mod.default)),
-  {
-    ssr: false,
-    loading: () => (
-      <div className='w-full h-full flex items-center justify-center'>
-        <div className='w-12 h-12 rounded-full border-2 border-violet-500/20 border-t-violet-500 animate-spin' />
-      </div>
-    ),
-  },
+// Only rendered client-side (wrapped in <ClientOnly> by Hero)
+const IconCloudComponent = lazy(() =>
+  import("@/components/ui/icon-cloud").then((mod) => ({
+    default: memo(mod.default),
+  })),
 );
 
 const slugs = [

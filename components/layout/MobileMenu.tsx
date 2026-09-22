@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import {
   Sheet,
@@ -9,16 +7,15 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { IconMenu2, IconArrowUpRight } from "@tabler/icons-react";
 
 const menuItems = [
-  { href: "/#services", label: "Services", description: "What we offer" },
-  { href: "/#about", label: "About", description: "Our story and mission" },
-  { href: "/projects", label: "Projects", description: "Our recent work" },
-  { href: "/#contact", label: "Contact", description: "Get in touch" },
+  { to: "/", hash: "services", label: "Services", description: "What we offer" },
+  { to: "/", hash: "about", label: "About", description: "Our story and mission" },
+  { to: "/projects", hash: undefined, label: "Projects", description: "Our recent work" },
+  { to: "/", hash: "contact", label: "Contact", description: "Get in touch" },
 ] as const;
 
 const contactItems = [
@@ -98,16 +95,16 @@ export default function MobileMenu() {
             className='relative flex justify-center py-4 border-b border-white/8'>
             <div className='absolute inset-0 [background:radial-gradient(circle_at_top,rgba(138,124,255,0.1),transparent_70%)]' />
             <Link
-              href='/'
+              to='/'
               onClick={() => setIsOpen(false)}
               className='relative'>
-              <Image
+              <img
                 src={logoSrc}
                 width={150}
                 height={55}
                 alt='Astraque logo'
                 className='w-37.5 h-13.75 object-contain'
-                priority
+                fetchPriority='high'
               />
             </Link>
           </motion.div>
@@ -121,13 +118,14 @@ export default function MobileMenu() {
               className='flex flex-col space-y-2.5'>
               {menuItems.map((item, index) => (
                 <motion.div
-                  key={item.href}
+                  key={item.label}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 + 0.2 }}>
                   <SheetClose asChild>
                     <Link
-                      href={item.href}
+                      to={item.to}
+                      hash={item.hash}
                       onClick={() => setIsOpen(false)}
                       className='group relative block p-3.5 rounded-xl border border-white/8 bg-white/2 hover:bg-white/5 hover:border-violet-500/30 transition-colors duration-300'>
                       <div className='absolute inset-0 rounded-xl [background:radial-gradient(circle_at_top,rgba(138,124,255,0.1),transparent_70%)]' />
@@ -161,12 +159,12 @@ export default function MobileMenu() {
                     }}>
                     <div className='flex items-center justify-between py-2'>
                       <SheetClose asChild>
-                        <Link
+                        <a
                           href={item.href}
                           className='flex items-center gap-2 text-gray-400 hover:text-white transition-colors'>
                           <span>{item.icon}</span>
                           <span>{item.label}</span>
-                        </Link>
+                        </a>
                       </SheetClose>
                       <button
                         onClick={() => handleCopy(item.number, index)}
