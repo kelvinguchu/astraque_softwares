@@ -1,19 +1,15 @@
-"use client";
-
 import { useState, useEffect, useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import MobileMenu from "./MobileMenu";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { IconPhone } from "@tabler/icons-react";
 
 const navItems = [
-  { label: "Services", href: "/#services", sectionId: "services" },
-  { label: "About", href: "/#about", sectionId: "about" },
-  { label: "Recent Projects", href: "/projects", sectionId: null },
-  { label: "Contact", href: "/#contact", sectionId: "contact" },
+  { label: "Services", to: "/", hash: "services", sectionId: "services" },
+  { label: "About", to: "/", hash: "about", sectionId: "about" },
+  { label: "Recent Projects", to: "/projects", hash: undefined, sectionId: null },
+  { label: "Contact", to: "/", hash: "contact", sectionId: "contact" },
 ] as const;
 
 export default function Navbar({
@@ -21,7 +17,7 @@ export default function Navbar({
 }: Readonly<{ className?: string }>) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const pathname = usePathname();
+  const pathname = useLocation({ select: (location) => location.pathname });
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const handleScroll = useCallback(() => {
@@ -94,14 +90,14 @@ export default function Navbar({
           <div className='relative px-4 py-3'>
             <div className='flex items-center justify-between'>
               {/* Logo */}
-              <Link href='/' className='relative flex items-center'>
-                <Image
+              <Link to='/' className='relative flex items-center'>
+                <img
                   src='/logo.png'
                   width={130}
                   height={45}
                   alt='Astraque logo'
                   className='w-32.5 h-11.25 object-contain'
-                  priority
+                  fetchPriority='high'
                 />
               </Link>
 
@@ -110,8 +106,9 @@ export default function Navbar({
                 <div className='flex items-center bg-white/5 rounded-full backdrop-blur-sm'>
                   {navItems.map((item) => (
                     <Link
-                      key={item.href}
-                      href={item.href}
+                      key={item.label}
+                      to={item.to}
+                      hash={item.hash}
                       className={cn(
                         "relative px-5 py-2 text-[15px] text-gray-300 transition-colors hover:text-white",
                         activeSection === item.label && "text-white",
@@ -136,14 +133,14 @@ export default function Navbar({
               {/* Right section */}
               <div className='flex items-center gap-2'>
                 <div className='hidden lg:flex items-center'>
-                  <Link
+                  <a
                     href='tel:+254792554525'
                     className='group flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/8 transition-colors'>
                     <IconPhone className='w-4 h-4 text-[#8A7CFF]' />
                     <span className='text-[15px] text-gray-300 group-hover:text-white'>
                       0792 554525
                     </span>
-                  </Link>
+                  </a>
                 </div>
 
                 <div className='md:hidden'>

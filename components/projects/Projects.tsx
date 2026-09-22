@@ -1,10 +1,7 @@
-"use client";
-
 import { memo } from "react";
 import { motion } from "motion/react";
 import { IconArrowUpRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 const projects = [
   {
@@ -103,13 +100,12 @@ function ProjectCard({
         <div className='absolute inset-0 bg-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay' />
 
         {/* Image */}
-        <Image
+        <img
           src={project.imgSrc}
           alt={project.title}
-          fill
-          className='object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 z-0'
+          className='absolute inset-0 w-full h-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 z-0'
           loading={index < 4 ? "eager" : "lazy"}
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          decoding='async'
         />
 
         {/* Content */}

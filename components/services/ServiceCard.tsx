@@ -1,8 +1,6 @@
-"use client";
-
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { IconArrowUpRight } from "@tabler/icons-react";
 
 interface ServiceCardProps {
@@ -25,7 +23,7 @@ export default function ServiceCard({
   index,
 }: Readonly<ServiceCardProps>) {
   return (
-    <Link href={`/services/${slug}`} className='block h-full outline-none'>
+    <Link to='/services/$slug' params={{ slug }} className='block h-full outline-none'>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

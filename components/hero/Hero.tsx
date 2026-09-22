@@ -1,21 +1,17 @@
-"use client";
-
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import {
   motion,
   AnimatePresence,
   useMotionValue,
   useSpring,
 } from "motion/react";
-import dynamic from "next/dynamic";
+import { ClientOnly } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { IconChevronDown } from "@tabler/icons-react";
 
-const IconsCloud = dynamic(() => import("./IconsCloud"), {
-  ssr: false,
-  loading: () => <div className='w-full h-70 md:h-137.5' />,
-});
+const IconsCloud = lazy(() => import("./IconsCloud"));
+
+const iconsCloudFallback = <div className='w-full h-70 md:h-137.5' />;
 
 const rotatingWords = ["experiences", "platforms", "products", "solutions"];
 
@@ -143,7 +139,7 @@ export default function Hero() {
             </p>
 
             <div className='mt-10'>
-              <Link
+              <a
                 href='#contact'
                 className='group relative inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-linear-to-b from-violet-500 to-violet-600 text-white font-medium shadow-lg shadow-violet-500/25 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-violet-500/30 transition-all duration-200'>
                 Let&apos;s Talk
@@ -159,7 +155,7 @@ export default function Hero() {
                     d='M17 8l4 4m0 0l-4 4m4-4H3'
                   />
                 </svg>
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}
@@ -180,7 +176,11 @@ export default function Hero() {
             <div className='absolute inset-0 flex items-center justify-center pointer-events-none'>
               <div className='w-56 h-56 md:w-80 md:h-80 rounded-full border border-indigo-500/5 animate-[spin_20s_linear_infinite_reverse]' />
             </div>
-            <IconsCloud />
+            <ClientOnly fallback={iconsCloudFallback}>
+              <Suspense fallback={iconsCloudFallback}>
+                <IconsCloud />
+              </Suspense>
+            </ClientOnly>
           </div>
         </motion.div>
       )}

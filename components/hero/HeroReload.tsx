@@ -1,5 +1,3 @@
-"use client";
-
 import Hero from "./Hero";
 import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import { cn } from "@/lib/utils";

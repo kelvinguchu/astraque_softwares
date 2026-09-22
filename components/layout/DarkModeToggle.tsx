@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { IconMoon, IconSun } from "@tabler/icons-react";

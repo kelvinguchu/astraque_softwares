@@ -1,8 +1,5 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/magicui/marquee";
-import Image from "next/image";
 import { IconQuote } from "@tabler/icons-react";
 import { motion } from "motion/react";
 
@@ -88,12 +85,10 @@ function ReviewCard({
 
           <div className='flex items-center gap-4 mb-4'>
             <div className='relative w-12 h-12'>
-              <Image
+              <img
                 src={img}
                 alt={name}
-                fill
-                sizes='48px'
-                className='rounded-full border border-white/8'
+                className='absolute inset-0 w-full h-full object-cover rounded-full border border-white/8'
                 loading='lazy'
                 decoding='async'
               />

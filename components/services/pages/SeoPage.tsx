@@ -1,7 +1,5 @@
-"use client";
-
 import { motion } from "motion/react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import type { ServicePageData } from "@/lib/services-data";
 import {
   IconArrowLeft,
@@ -37,7 +35,8 @@ export default function SeoPage({ data }: Readonly<{ data: ServicePageData }>) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}>
             <Link
-              href='/#services'
+              to='/'
+              hash='services'
               className='inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-12 group'>
               <IconArrowLeft className='w-4 h-4 group-hover:-translate-x-1 transition-transform' />{" "}
               Back to Services
@@ -388,7 +387,8 @@ export default function SeoPage({ data }: Readonly<{ data: ServicePageData }>) {
             Data-driven SEO that delivers measurable growth.
           </p>
           <Link
-            href='/#contact'
+            to='/'
+            hash='contact'
             className='inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors'>
             Get a Free Quote <IconArrowUpRight className='w-5 h-5' />
           </Link>
